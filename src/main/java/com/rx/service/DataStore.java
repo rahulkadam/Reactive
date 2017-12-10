@@ -9,11 +9,13 @@ import io.reactivex.internal.operators.observable.ObservableRefCount;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.locks.Lock;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class DataStore {
 
+    public static Object lock = new Object();
     public List<Student> getStudentData() {
         List<Student> list = new ArrayList<>();
         try {
@@ -96,6 +98,37 @@ public class DataStore {
 
     public List<Student> filterStudent(List<Student> studentList , Predicate<Student> p)
     {
+        System.out.println("Entered : ");
+
+        synchronized (lock) {
+            try {
+                System.out.println("Inside : ");
+                Thread.sleep(4000);
+            } catch (Exception e) {
+
+            }
+        }
+         return studentList.stream().filter(p).collect(Collectors.toList());
+    }
+
+    public List<Student> filterStudentForThread(List<Student> studentList , Predicate<Student> p , int time)
+    {
+        System.out.println("Entered : ");
+
+        synchronized (lock) {
+            try {
+                System.out.println("Inside before sleep: ");
+                Thread.sleep(time);
+                System.out.println("Inside after sleep: ");
+            } catch (Exception e) {
+                lock.notify();
+            }
+            lock.notify();
+        }
         return studentList.stream().filter(p).collect(Collectors.toList());
+    }
+
+    public void unlockLock() {
+        lock.notify();
     }
 }
