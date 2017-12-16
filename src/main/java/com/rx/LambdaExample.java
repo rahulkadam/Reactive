@@ -15,7 +15,17 @@ public class LambdaExample {
 
     public  static void main(String args[]) {
 
+        // Generic Testing
+
+
         LambdaExample lambdaExample = new LambdaExample();
+
+        // Java generic
+        Long lValue = lambdaExample.returnSameValue(new Long(4));
+        Boolean iValue = lambdaExample.returnSameValue(new Boolean(true));
+        String SValue = lambdaExample.returnSameValue("aaa");
+
+
         lambdaExample.Addition(a ->{ System.out.println("We are in labmda num1" +a);} ,
                 b -> {System.out.println("we are in lambda num2" +b);
     });
@@ -49,5 +59,10 @@ public class LambdaExample {
     public boolean division(Predicate<Integer> num , Predicate<Integer> num1){
         return num.and(num1).test(7);
         //return num.test(7);
+    }
+
+    public <M> M returnSameValue(M obj) {
+        System.out.print("return " +obj);
+        return obj;
     }
 }

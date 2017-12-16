@@ -16,6 +16,8 @@ import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
 
 import java.util.List;
+import java.util.concurrent.Callable;
+import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
 public class sample {
@@ -48,6 +50,7 @@ public class sample {
      * method which provide us entry point is onSubscribe
      */
     public void PrintObserverExample() {
+
 
         Observable<String> observable = dataStore.getTopperStudent("Rahul" , "Kadam" , "Sonam");
 
