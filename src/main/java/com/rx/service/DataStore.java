@@ -62,7 +62,7 @@ public class DataStore {
             protected void subscribeActual(Observer<? super String> observer) {
                     try {
                         for (String name : nameList) {
-                            Thread.sleep(20);
+                            System.out.print("nmmm");
                             observer.onNext(name);
                         }
                     } catch (Exception e) {

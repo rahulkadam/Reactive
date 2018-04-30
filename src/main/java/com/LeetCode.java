@@ -154,6 +154,7 @@ public class LeetCode {
         }
     }
 
+
     static void manageQueryResult(List<HashMap<String, Object>> orderList , List<String> resultList) {
         Set<String> uniqueProductList = orderList.stream().map(a -> (String)a.get("Symbol")).collect(Collectors.toCollection(TreeSet::new));
 
@@ -163,6 +164,7 @@ public class LeetCode {
             }).sorted((a, b) -> {
                 return ((Float) a.get("Price")).compareTo((Float) b.get("Price"));
             }).collect(Collectors.toList());
+
 
             List<HashMap<String, Object>> sellerList = orderList.stream().filter(a -> {
                 return ((String) a.get("Side")).equals("S") && a.get("Symbol").equals(order);

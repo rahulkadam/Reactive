@@ -52,6 +52,7 @@ public class LambdaExample {
         a.accept(num,num2);
     }
 
+
     public String multiplication (int num , Function<Integer, String> function) {
         return function.apply(num);
     }

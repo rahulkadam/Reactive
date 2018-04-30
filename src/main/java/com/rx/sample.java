@@ -24,9 +24,9 @@ public class sample {
 
     public DataStore dataStore;
     public static void main(String[] args) {
-        Flowable.just("Hello world").subscribe((a) -> {
+        // Flowable.just("Hello world").subscribe((a) -> {
          //   System.out.println(a);
-        });
+       // });
         sample s= new sample();
        // s.initialDataStore();
        // s.PrintObserverExample();
@@ -37,7 +37,9 @@ public class sample {
 //            s.Combinations(arr,arr.length,i);
           //  System.out.print("  " + B[i]);
         }
-        System.out.println(s.permuteHelper(arr,0 , originalArray , 0));
+     //   System.out.println(s.permuteHelper(arr,0 , originalArray , 0));
+        s.fetchAndprintData();
+        System.out.println("after pchecking");
     }
 
     private int permuteHelper(int[] arr, int index ,int[] originalArray , int osum){
@@ -203,6 +205,7 @@ the values of the counters after each consecutive operation will be:
 
     public void printStudentdata(List<Student> list) {
          System.out.println("Student " + list);
+         list.forEach(a -> {});
     }
     public void printCollegedata(List<College> list) {
         System.out.println("College : "+ list);
@@ -260,36 +263,37 @@ the values of the counters after each consecutive operation will be:
      * This function is to print data and details about flowable
      */
     public void fetchAndprintData() {
-          System.out.println("starting : ");
-          Flowable.just(new DataStore().getStudentData()).subscribe(getSubscriber());
-          System.out.println("after Student: ");
+         // System.out.println("starting : ");
+        //   Flowable.just(new DataStore().getStudentData()).subscribe(getSubscriber());
+        //  System.out.println("after Student: ");
 
-          Flowable.just(new DataStore().getCollegeData()).
-                  subscribeOn(Schedulers.io()).observeOn(Schedulers.single()).subscribe(a -> printCollegedata(a));
+      //    Flowable.just(new DataStore().getCollegeData()).
+       //           subscribeOn(Schedulers.io()).observeOn(Schedulers.single()).subscribe(a -> printCollegedata(a));
 
 
-          System.out.println("after College: ");
-          new DataStore().getResultData().subscribe(System.out::println);
+      //    System.out.println("after College: ");
+      //    new DataStore().getResultData().subscribe(System.out::println);
 
-          Flowable.range(1,4).map(a -> a*a).filter(a -> a>12).delay(2, TimeUnit.SECONDS).subscribe(a -> {
-            System.out.println(a);
-        });
+     //     Flowable.range(1,4).map(a -> a*a).filter(a -> a>12).delay(2, TimeUnit.SECONDS).subscribe(a -> {
+      //      System.out.println(a);
+     //   });
 
-        TestSubscriber<Integer> testSubscriber = Flowable.range(1,5).test();
-        System.out.println(testSubscriber.values());
+     //   TestSubscriber<Integer> testSubscriber = Flowable.range(1,5).test();
+  //      System.out.println(testSubscriber.values());
 
-        new DataStore().getTopperStudent("Rahul" , "Kadam" , "Sonam").
-                        subscribeWith(getGenericSubscriber());
-
+        Observable<String> str = new DataStore().getTopperStudent("Rahul" , "Kadam" , "Sonam");
+        str.subscribeWith(getGenericSubscriber());
+        str.subscribeWith(getGenericSubscriber());
+        str.subscribeWith(getGenericSubscriber());
         // Data example for range and merge on observable
-        Observable<Integer> i = Observable.range(1,3);
-        Observable<Integer> a1 = Observable.range(4,3);
-        Observable<Integer> a2 = Observable.merge(i,a1);
-        a2.subscribe(System.out::println);
+      //  Observable<Integer> i = Observable.range(1,3);
+     //   Observable<Integer> a1 = Observable.range(4,3);
+      //  Observable<Integer> a2 = Observable.merge(i,a1);
+     //   a2.subscribe(System.out::println);
 
-        System.out.println("after flowable");
+      //  System.out.println("after flowable");
         try {
-            Thread.sleep(5000);
+            //Thread.sleep(5000);
         }catch (Exception e) {}
     }
 
@@ -307,6 +311,9 @@ the values of the counters after each consecutive operation will be:
             @Override
             public void onNext(String o) {
                 System.out.println("Student : " + o);
+                try {
+                    Thread.sleep(5000);
+                }catch (Exception e) {}
             }
 
             @Override
